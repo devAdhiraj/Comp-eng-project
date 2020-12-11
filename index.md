@@ -6,4 +6,6 @@ Computer Engineer Project - Grade 12
 
 </nav>
 
-    <section id="piechart"></section>
+    {{<section id="piechart"></section>}}
+{{ site.time | date_to_rfc822 }}
+
