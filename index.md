@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<html>
 
 <head>
 	<meta charset="utf-8">
@@ -8,8 +7,10 @@
 	<link href="style.css" rel="stylesheet" type="text/css" />
 
 <body>
-Computer Engineer Project - Grade 12
 
+<header>
+	<h1>Computer Engineer Project - Grade 12</h1>
+</header>
 
 <nav>
 
