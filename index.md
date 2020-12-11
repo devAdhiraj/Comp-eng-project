@@ -1,11 +1,15 @@
+{{ site.time | date_to_long_string: "ordinal" }}
+
+
 Computer Engineer Project - Grade 12
-<nav>
+
+
+{{<nav>
 
 <a href="https://devadhiraj.github.io/Comp-eng-project/">Home</a>
 <a href="https://github.com/devAdhiraj/Comp-eng-project">About</a>
 
-</nav>
+</nav>}}
 
     {{<section id="piechart"></section>}}
-{{ site.time | date_to_rfc822 }}
 
