@@ -13,3 +13,5 @@ Computer Engineer Project - Grade 12
 
     {{<section id="piechart"></section>}}
 
+{{<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>}}
+    {{<script src="backEnd.js"></script>}}
