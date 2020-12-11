@@ -1,5 +1,9 @@
 Computer Engineer Project - Grade 12
+<nav>
 
-<ul>
-<li>why</li>
-  </ul>
+<a href="https://devadhiraj.github.io/Comp-eng-project/">Home</a>
+<a href="https://github.com/devAdhiraj/Comp-eng-project">About</a>
+
+</nav>
+
+    <section id="piechart"></section>
