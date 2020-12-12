@@ -4,7 +4,7 @@ google.charts.setOnLoadCallback(drawChart);
 // Draw the chart and set the chart values
 function drawChart() {
  var data = google.visualization.arrayToDataTable([
- ['Task', "7"],
+ ['Task', 7],
  ['People', 8],
 ]);
 
