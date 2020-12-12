@@ -5,11 +5,7 @@ google.charts.setOnLoadCallback(drawChart);
 function drawChart() {
  var data = google.visualization.arrayToDataTable([
  ['Task', "7"],
- ['Work', 8],
- ['Eat', 2],
- ['TV', 4],
- ['Gym', 2],
- ['Sleep', 8]
+ ['People', 8],
 ]);
 
  // Optional; add a title and set the width and height of the chart
