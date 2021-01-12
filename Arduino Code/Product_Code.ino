@@ -21,12 +21,13 @@ const char * myWriteAPIKey = SECRET_WRITE_APIKEY;
 // Initialize our values
 int count;
 int capacity;
+int trackTime;
 int touchSensor = A4;
 int piezo = 10;
-int sensor1 = 9;
-int sensor2 = 8;
-int redPin = A3;
-int greenPin = A2;
+int sensor1 = 8;
+int sensor2 = 9;
+int redPin = A2;
+int greenPin = A3;
 int xJoy = A1;
 int yJoy = A0;
 int tripWire1, tripWire2, touchState;
@@ -64,7 +65,6 @@ void setup() {
 void loop() {
   //
   setupCount();
-  delay(20000); // Wait 20 seconds to update the channel again
 }
 
 void setupCount() {
@@ -76,18 +76,28 @@ void setupCount() {
   lcdPrint("Max Capacity:" + String(capacity), 0, 1, false);
 
   count = changeCount(count, 0, 11, 0);
-  delay(500);
+  for (int i = 0; i < 2; i++) {
+    tone(piezo, 700);
+    delay(125);
+    noTone(piezo);
+    delay(125);
+  }
   capacity = changeCount(capacity, count, 13, 1);
-
   lcdPrint("     Setup     ", 0, 0, true);
   lcdPrint("    Complete   ", 0, 1, false);
+  for (int i = 0; i < 2; i++) {
+    tone(piezo, 700);
+    delay(125);
+    noTone(piezo);
+    delay(125);
+  }
   delay(1500);
 
   laserSetup();
 }
 
 void laserSetup() {
-  lcdPrint("Set Laser", 3, 0, true);
+  lcdPrint("Set Lasers", 3, 0, true);
   digitalWrite(redPin, HIGH);
   digitalWrite(greenPin, LOW);
   int sensorState1 = 0;
@@ -118,13 +128,18 @@ void laserSetup() {
     delay(150);
     digitalWrite(greenPin, HIGH);
   }
-
+  for (int i = 0; i < 2; i++) {
+    tone(piezo, 700);
+    delay(125);
+    noTone(piezo);
+    delay(125);
+  }
   int x = 0;
+  lcdPrint("Both Lasers", 3, 0, true);
+  lcdPrint("Set", 7, 1, false);
   while (sensorState1 == 1 && sensorState2 == 1 && x < 20) {
     sensorState1 = digitalRead(sensor1);
     sensorState2 = digitalRead(sensor2);
-    lcdPrint("Both Lasers", 2, 0, true);
-    lcdPrint("Set", 7, 1, false);
     delay(100);
     x++;
   }
@@ -185,12 +200,12 @@ void trackCount() {
   touchState = 0;
   lcdPrint("Live Count:" + String(count), 0, 0, true);
   lcdPrint("Max Capacity:" + String(capacity), 0, 1, false);
-  
   while (tripWire1 == 1 && tripWire2 == 1 && touchState == 0) {
     tripWire1 = digitalRead(sensor1);
     tripWire2 = digitalRead(sensor2);
     touchState = digitalRead(touchSensor);
-    delay(100);
+    trackTime += 1;
+    delay(65);
   }
 
   if (touchState == 1) {
@@ -207,6 +222,24 @@ void trackCount() {
     }
     int temp = trackCount1(tripWire1, tripWire2);
     count += (firstTripped - temp);
+    if (count < 0) {
+      count = 0;
+    }
+    if (count > capacity) {
+      tone(piezo, 700);
+      digitalWrite(greenPin, LOW);
+      digitalWrite(redPin, HIGH);
+    }
+    else {
+      digitalWrite(redPin, LOW);
+      digitalWrite(greenPin, HIGH);
+      noTone(piezo);
+    }
+
+  if(trackTime >= 500){
+    uploadData();
+  }
+  
   }
   trackCount();
 }
@@ -219,8 +252,9 @@ int trackCount1(int t1, int t2) {
     t1 = digitalRead(sensor1);
     t2 = digitalRead(sensor2);
     touchState = digitalRead(touchSensor);
-    delay(100);
-    if(t1 == 0 && t2 == 0){
+    delay(65);
+    trackTime += 1;
+    if (t1 == 0 && t2 == 0) {
       trackCount2();
       initialState1 = digitalRead(sensor1);
       initialState2 = digitalRead(sensor2);
@@ -250,7 +284,8 @@ void trackCount2() {
     touchState = digitalRead(touchSensor);
     tripWire1 = digitalRead(sensor1);
     tripWire2 = digitalRead(sensor2);
-    delay(100);
+    delay(65);
+    trackTime += 1;
   }
 
   if (touchState == 1) {
@@ -259,26 +294,24 @@ void trackCount2() {
 }
 
 
-
 void uploadData() {
   // Connect or reconnect to WiFi
   if (WiFi.status() != WL_CONNECTED) {
-    //    Serial.println(SECRET_SSID);
-    while (WiFi.status() != WL_CONNECTED) {
       WiFi.begin(ssid, pass);  // Connect to WPA/WPA2 network.
-      delay(5000); // MAKE MY OWN DELAY
-
-    }
+      trackTime = 400;
   }
-
+  else{
+    trackTime = 0;
+    tone(piezo, 750);
   // set the fields with the values
   ThingSpeak.setField(1, count);
   ThingSpeak.setField(2, capacity);
 
   // write to the ThingSpeak channel
   int x = ThingSpeak.writeFields(myChannelNumber, myWriteAPIKey);
+  }
+  trackCount();
 }
-
 
 
 
