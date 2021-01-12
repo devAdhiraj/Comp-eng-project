@@ -21,19 +21,25 @@ const char * myWriteAPIKey = SECRET_WRITE_APIKEY;
 // Initialize our values
 int count;
 int capacity;
+int touchSensor = A4;
+int piezo = 10;
+int sensor1 = 9;
+int sensor2 = 8;
+int redPin = A3;
+int greenPin = A2;
 int xJoy = A1;
 int yJoy = A0;
-int button = 9;
-int sensor1 = A3;
-int sensor2 = 8;
-int tripWire1, tripWire2, buttonState;
+int tripWire1, tripWire2, touchState;
 void setup() {
   lcd.begin(16, 2);
-  pinMode(button, INPUT);
+  pinMode(touchSensor, INPUT);
   pinMode(xJoy, INPUT);
   pinMode(yJoy, INPUT);
   pinMode(sensor1, INPUT);
   pinMode(sensor2, INPUT);
+  pinMode(piezo, OUTPUT);
+  pinMode(redPin, OUTPUT);
+  pinMode(greenPin, OUTPUT);
   // initialize serial for ESP module
   setEspBaudRate(ESP_BAUDRATE);
 
@@ -77,10 +83,65 @@ void setupCount() {
   lcdPrint("    Complete   ", 0, 1, false);
   delay(1500);
 
-  lcdPrint("Live Count:" + String(count), 0, 0, true);
-  lcdPrint("Max Capacity:" + String(capacity), 0, 1, false);
+  laserSetup();
+}
+
+void laserSetup() {
+  lcdPrint("Set Laser", 3, 0, true);
+  digitalWrite(redPin, HIGH);
+  digitalWrite(greenPin, LOW);
+  int sensorState1 = 0;
+  int sensorState2 = 0;
   delay(500);
-  trackCount();
+  while (sensorState1 == 0 || sensorState2 == 0) {
+    sensorState1 = digitalRead(sensor1);
+    sensorState2 = digitalRead(sensor2);
+
+    if (sensorState1 == 1 || sensorState2 == 1) {
+      tone(piezo, 500);
+      digitalWrite(redPin, HIGH);
+      delay(500);
+      digitalWrite(redPin, LOW);
+      noTone(piezo);
+      delay(500);
+    }
+    else {
+      delay(1500);
+    }
+  }
+  int touchState = 0;
+  while (sensorState1 == 1 && sensorState2 == 1 && touchState == 0) {
+    sensorState1 = digitalRead(sensor1);
+    sensorState2 = digitalRead(sensor2);
+    touchState = digitalRead(touchSensor);
+    digitalWrite(redPin, LOW);
+    delay(150);
+    digitalWrite(greenPin, HIGH);
+  }
+
+  int x = 0;
+  while (sensorState1 == 1 && sensorState2 == 1 && x < 20) {
+    sensorState1 = digitalRead(sensor1);
+    sensorState2 = digitalRead(sensor2);
+    lcdPrint("Both Lasers", 2, 0, true);
+    lcdPrint("Set", 7, 1, false);
+    delay(100);
+    x++;
+  }
+  if (x < 20) {
+    digitalWrite(greenPin, LOW);
+    digitalWrite(redPin, HIGH);
+    lcdPrint("Laser Setup", 1, 0, true);
+    lcdPrint("Failed", 5, 1, false);
+    delay(2000);
+    laserSetup();
+  }
+  else {
+    lcdPrint("Laser Setup", 1, 0, true);
+    lcdPrint("Successful", 3, 2, false);
+    delay(2000);
+    trackCount();
+  }
 }
 
 void lcdPrint(String value, int cx, int cy, bool lcdClear) {
@@ -96,15 +157,15 @@ int changeCount(int temp, int minVal, int cx, int cy) {
   if (temp < minVal) {
     temp = minVal;
   }
-  while (digitalRead(button) != 1) {
+  while (digitalRead(touchSensor) != 1) {
     int xState = analogRead(xJoy);
     int yState = analogRead(yJoy);
-    if (300 < xState < 700 && yState > 700) {
+    if (300 < yState < 700 && xState < 430) {
       if (temp < 1000) {
         temp++;
       }
     }
-    else if (300 < xState < 700 && yState < 430) {
+    else if (300 < yState < 700 && xState > 700) {
       if (temp > minVal) {
         temp--;
       }
@@ -119,102 +180,90 @@ int changeCount(int temp, int minVal, int cx, int cy) {
 
 
 void trackCount() {
-  tripWire1 = 0;
-  tripWire2 = 0;
-  buttonState = 0;
-
-  while (tripWire1 == 0 && tripWire2 == 0 && buttonState == 0) {
+  tripWire1 = 1;
+  tripWire2 = 1;
+  touchState = 0;
+  lcdPrint("Live Count:" + String(count), 0, 0, true);
+  lcdPrint("Max Capacity:" + String(capacity), 0, 1, false);
+  
+  while (tripWire1 == 1 && tripWire2 == 1 && touchState == 0) {
     tripWire1 = digitalRead(sensor1);
     tripWire2 = digitalRead(sensor2);
-    buttonState = digitalRead(button);
-    delay(50);
+    touchState = digitalRead(touchSensor);
+    delay(100);
   }
 
-  if (buttonState == 1) {
+  if (touchState == 1) {
     setupCount();
   }
 
-  else if (tripWire1 == 1) {
-    int lastTripped = helperCount(1);
-    int countChange = (lastTripped - 1);
-    count += countChange;
-  }
   else {
-    int lastTripped = helperCount(2);
-    int countChange = (lastTripped - 2);
-    count += countChange;
+    int firstTripped;
+    if (tripWire1 == 0) {
+      firstTripped = 1;
+    }
+    else {
+      firstTripped = 2;
+    }
+    int temp = trackCount1(tripWire1, tripWire2);
+    count += (firstTripped - temp);
   }
-  
   trackCount();
 }
 
-int helperCount(int num) {
-  int tripped;
-  int trippedWire = 1;
-  int checkWire = 0;
-  int checkTrip;
-  
-  if (num == 1) {
-    checkTrip = sensor2;
-    tripped = sensor1;
-  }
-  else {
-    checkTrip = sensor1;
-    tripped = sensor2;
-  }
-  while (trippedWire == 1 && checkWire == 0 && buttonState == 0){
-    trippedWire = digitalRead(tripped);
-    checkTrip = digitalRead(checkWire);
-    buttonState = digitalRead(button);
-    delay(50);
-  }
+int trackCount1(int t1, int t2) {
+  int initialState1 = t1;
+  int initialState2 = t2;
 
-  if(trippedWire == 0){
-    if(tripped == sensor1){
-      return 2;
-    }
-    else{
-      return 1;
+  while (t1 == initialState1 && t2 == initialState2 && touchState == 0) {
+    t1 = digitalRead(sensor1);
+    t2 = digitalRead(sensor2);
+    touchState = digitalRead(touchSensor);
+    delay(100);
+    if(t1 == 0 && t2 == 0){
+      trackCount2();
+      initialState1 = digitalRead(sensor1);
+      initialState2 = digitalRead(sensor2);
+      t1 = initialState1;
+      t2 = initialState2;
     }
   }
-  else if(checkTrip == 1){
-    return helperCount(untripCheck()); 
-  }
 
-  else{
+  if (touchState == 1) {
     setupCount();
   }
-}
-
-int untripCheck(){
-  int trip1 = 1;
-  int trip2 = 1;
-  buttonState = 0;
-  while (trip1 == 1 && trip2 == 1 && buttonState == 0){
-    trip1 = digitalRead(sensor1);
-    trip2 = digitalRead(sensor2);
-    buttonState = digitalRead(button);
-    delay(50);
-  }
-
-  if(buttonState == 1){
-    setupCount();
-  }
-
-  else if(trip1 == 0){
+  else if (t1 - initialState1 == 1) {
     return 1;
   }
-  else{
+  else {
     return 2;
   }
-  
-  
+
 }
+
+
+void trackCount2() {
+  tripWire1 = 0;
+  tripWire2 = 0;
+
+  while (tripWire1 == 0 && tripWire2 == 0 && touchState == 0) {
+    touchState = digitalRead(touchSensor);
+    tripWire1 = digitalRead(sensor1);
+    tripWire2 = digitalRead(sensor2);
+    delay(100);
+  }
+
+  if (touchState == 1) {
+    setupCount();
+  }
+}
+
+
 
 void uploadData() {
   // Connect or reconnect to WiFi
   if (WiFi.status() != WL_CONNECTED) {
-//    Serial.println(SECRET_SSID);
+    //    Serial.println(SECRET_SSID);
     while (WiFi.status() != WL_CONNECTED) {
       WiFi.begin(ssid, pass);  // Connect to WPA/WPA2 network.
       delay(5000); // MAKE MY OWN DELAY
