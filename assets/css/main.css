@@ -223,6 +223,15 @@ text-color: #ffffff;
 }
 iframe{
 	float: center;
+	width: 500px;
+	max-width: 100vw;
+	height: 300px;
+	overflow:scroll;
+}
+@media only screen and (max-width: 600px){
+		iframe {
+			width: 88vw;
+		}
 }
 	h1 {
 		font-size: 4rem;
