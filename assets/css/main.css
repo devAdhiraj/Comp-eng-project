@@ -200,14 +200,30 @@ input, select, textarea {
 		}
 #piechart {
 float: left;
-width: 30vw;
+width: 45vw;
 height: 50vh;
 color: #ffffff;
 text-color: #ffffff;
 
 }
+#cap, #count, #space{
+	float:left;
+	width: 20vw;
+	height: 10vh;
 
-
+}
+@media only screen and (max-aspect-ratio: 301/272){
+	#piechart {
+		width:90vw;
+	}
+	#cap, #count, #space {
+		width: 80vw;
+		height: 5vh;
+	}
+}
+iframe{
+	float: center;
+}
 	h1 {
 		font-size: 4rem;
 		line-height: 1.1;
@@ -305,7 +321,7 @@ text-color: #ffffff;
 	}
 
 	a {
-		color: #212931;
+		color: #ffffff;
 		border-bottom-color: rgba(33, 41, 49, 0.5);
 	}
 
@@ -4397,7 +4413,7 @@ text-color: #ffffff;
 		}
 
 	#copyright {
-		color: 000000;
+		color: #ffffff;
 		position: relative;
 		color: rgba(0,0,0, 0.25);
 		cursor: default;
@@ -4458,6 +4474,7 @@ text-color: #ffffff;
 			list-style: none;
 			margin: 0;
 			padding-left: 0;
+			color: white;
 		}
 
 			#copyright ul li {

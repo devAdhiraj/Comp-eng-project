@@ -1,4 +1,7 @@
-fetch('https://api.thingspeak.com/channels/1265432/feeds/last/')
+window.addEventListener("resize", myFunction);
+myFunction();
+function myFunction(){
+  fetch('https://api.thingspeak.com/channels/1265432/feeds/last/')
   .then((response) => {
     return response.json()
   })
@@ -28,7 +31,8 @@ fetch('https://api.thingspeak.com/channels/1265432/feeds/last/')
     legend: {
       textStyle: {
         color: '#ffffff'
-      }
+      },
+      position:'none'
     }
   };
 
@@ -47,5 +51,6 @@ fetch('https://api.thingspeak.com/channels/1265432/feeds/last/')
       }
   })
   .catch((err) => {
-    document.getElementById("Piechart").innerHTML = "Device Inactive";
+    document.getElementById("inactive").innerHTML = "Device Inactive";
     })
+}
