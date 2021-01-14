@@ -16,6 +16,22 @@ fetch('https://api.thingspeak.com/channels/1265432/feeds/last/')
 
         function drawChart() {
           // Define the chart to be drawn.
+          var options = {
+    backgroundColor: 'transparent',
+    pieSliceText: 'label',
+    pieSliceBorderColor: '#333642',
+    is3D: true,
+    chartArea: {
+      width: '100%',
+      height: '94%'
+    },
+    legend: {
+      textStyle: {
+        color: '#ffffff'
+      }
+    }
+  };
+
           var data = new google.visualization.DataTable();
           data.addColumn('string', 'Element');
           data.addColumn('number', 'Percentage');
@@ -26,7 +42,7 @@ fetch('https://api.thingspeak.com/channels/1265432/feeds/last/')
 
           // Instantiate and draw the chart
           var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-          chart.draw(data, null);
+          chart.draw(data, options);
         }
       }
   })
