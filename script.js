@@ -12,7 +12,8 @@ function myFunction(){
     document.getElementById("count").innerHTML = "Live Count: " + String(liveCount);
     document.getElementById("cap").innerHTML = "Max Capacity: " + String(maxCapacity);
     document.getElementById("space").innerHTML = "Space Left: " + String(spaceLeft);
-    if(maxCapacity != 0){
+
+    if(typeof(capacity) == "number"){
 
     google.charts.load('current', {packages: ['corechart']});
         google.charts.setOnLoadCallback(drawChart);

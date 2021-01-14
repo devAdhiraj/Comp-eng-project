@@ -204,8 +204,12 @@ width: 45vw;
 height: 50vh;
 color: #ffffff;
 text-color: #ffffff;
-
 }
+
+#inactive {
+	margin: 25%;
+}
+
 #cap, #count, #space{
 	float:left;
 	width: 20vw;
@@ -4627,6 +4631,7 @@ iframe{
 			}
 
 				#navPanel .links li a {
+					color: black;
 					border-bottom: 0;
 					display: block;
 					font-family: "Source Sans Pro", Helvetica, sans-serif;
@@ -4725,5 +4730,7 @@ iframe{
 			box-shadow: 0 0 1.5rem 0 rgba(0, 0, 0, 0.2);
 			visibility: visible;
 		}
-
+nav .icon{
+	color: black;
+}
 	}
