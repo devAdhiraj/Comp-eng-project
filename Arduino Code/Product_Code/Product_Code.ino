@@ -75,6 +75,7 @@ void loop() {
    many people can be in the room while still maintaining physical distancing.
 */
 void setupCount() {
+  
   lcdPrint("Setup Count and", 0, 0, true);
   lcdPrint("Maximum Capacity", 0, 1, false);
   delay(2500);
@@ -86,12 +87,14 @@ void setupCount() {
   capacity = changeCount(capacity, count, 13, 1);
   lcdPrint("     Setup     ", 0, 0, true);
   lcdPrint("    Complete   ", 0, 1, false);
+
   for (int i = 0; i < 2; i++) {
     tone(piezo, 700);
     delay(125);
     noTone(piezo);
     delay(125);
   }
+
   delay(1500);
   uploadData();
   laserSetup();
@@ -104,6 +107,7 @@ void setupCount() {
    correctly.
 */
 void laserSetup() {
+
   for (int i = 0; i < 2; i++) {
     tone(piezo, 700);
     delay(125);
