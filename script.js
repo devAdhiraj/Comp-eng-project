@@ -13,8 +13,8 @@ function myFunction(){
     document.getElementById("cap").innerHTML = "Max Capacity: " + String(maxCapacity);
     document.getElementById("space").innerHTML = "Space Left: " + String(spaceLeft);
 
-    if(typeof(capacity) == "number"){
-
+    if(typeof(maxCapacity) == "number"){
+      
     google.charts.load('current', {packages: ['corechart']});
         google.charts.setOnLoadCallback(drawChart);
 
