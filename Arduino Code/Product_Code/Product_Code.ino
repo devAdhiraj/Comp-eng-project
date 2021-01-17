@@ -1,13 +1,12 @@
 #include "WiFiEsp.h"
-//#include "secrets.h"
-#include "ThingSpeak.h" // always include thingspeak header file after other header files and custom macros
+#include "ThingSpeak.h" 
 
-char ssid[] = "Happy Place";   // your network SSID (name)
-char pass[] = "106146BCHD";   // your network password
 WiFiEspClient  client;
 
 #include "SoftwareSerial.h"
+#include "EEPROM.h"
 #include <LiquidCrystal.h>
+
 SoftwareSerial Serial1(6, 7); // RX, TX
 #define ESP_BAUDRATE  19200
 
@@ -27,7 +26,8 @@ int xJoy = A1;
 int yJoy = A0;
 int tripWire1, tripWire2, touchState, initialState1, initialState2;
 int count, capacity, trackTime, firstTripped;
-
+char password[16];
+char wifiName[16];
 
 void setup() {
 
@@ -59,10 +59,32 @@ void setup() {
   lcdPrint(" Module Located ", 0, 0, true);
 
   ThingSpeak.begin(client);  // Initialize ThingSpeak
+
 }
 
 void loop() {
+  readData();
   setupCount();
+}
+
+
+/* 
+ *The readData function runs whenever the device restarts. This
+ *function basically reads the values in the EEPROM and sets the values
+ *of wifiName and password.
+ */
+void readData(){
+    byte range = EEPROM.read(0);
+  for(byte i = 0; i < range; i++){
+    char s = EEPROM.read(i + 1);
+    wifiName[i] = s;
+  }
+  byte offset = range + 1;
+  range = EEPROM.read(offset);
+  for(byte i  = 0; i < range; i++){
+    char s = EEPROM.read(i + offset + 1);
+    password[i] = s;
+  }
 }
 
 
@@ -72,10 +94,9 @@ void loop() {
    people in the room manually. For example, to start with if there are already 10
    people in the room, then this function allows the user to set the count to 10.
    This function is also used to set the maximum capacity of the room which is how
-   many people can be in the room while still maintaining physical distancing.
+   many people can be in the room while still maintaining physical distancing
 */
 void setupCount() {
-  
   lcdPrint("Setup Count and", 0, 0, true);
   lcdPrint("Maximum Capacity", 0, 1, false);
   delay(2500);
@@ -87,14 +108,20 @@ void setupCount() {
   capacity = changeCount(capacity, count, 13, 1);
   lcdPrint("     Setup     ", 0, 0, true);
   lcdPrint("    Complete   ", 0, 1, false);
-
-  for (int i = 0; i < 2; i++) {
-    tone(piezo, 700);
-    delay(125);
-    noTone(piezo);
-    delay(125);
+  int y = 0;
+  do {
+    y++;
+    touchState = digitalRead(touchSensor);
+    delay(100);
+  } while (touchState == 1 && y < 30);
+  piezoBeep();
+  if (y == 30) {
+    memset(wifiName,0, sizeof(wifiName));
+    memset(password,0, sizeof(password));
+    setWifiCred();
+    lcdPrint("Wifi Setup", 2, 0, true);
+    lcdPrint("Complete", 3, 1, false);
   }
-
   delay(1500);
   uploadData();
   laserSetup();
@@ -102,18 +129,141 @@ void setupCount() {
 
 
 /*
+ * The setWifiCred function runs when the user holds the touchsensor for 3
+ * seconds. This function calls on to other functions which perform specific
+ * tasks.
+ */
+void setWifiCred() {
+  lcdPrint("Set Wifi", 3, 0, true);
+  lcdPrint("Credentials", 2, 1, false);
+  delay(2000);
+  lcdPrint("Wifi Name:", 0, 0, true);
+  joystickInput(wifiName);
+  piezoBeep();
+  lcdPrint("Password:", 0, 0, true);
+  joystickInput(password);
+  piezoBeep();
+  saveData();
+
+}
+/*
+ * The saveData function is called after the user has inputted the
+ * wifi name and password. This function basically saves both the variables
+ * into the EEPROM so that these variables can be accessed even after the arduino
+ * is rebooted.
+ */
+void saveData(){
+  byte strSize = strlen(wifiName);
+  EEPROM.update(0, strSize);
+  for(byte i = 0; i < strSize; i++){
+    EEPROM.update(i+1, wifiName[i]);
+    Serial.println(i);
+  }
+  byte offset = strSize + 1;
+  strSize = strlen(password);
+  EEPROM.update(offset, strSize);
+  for(byte i = 0; i < strSize; i++){
+    EEPROM.update(i + offset + 1, password[i]);
+  }
+}
+
+
+/*
+ * piezoBeep is a small but useful function that is called 
+ * several times whenever a beeping sound needs to be made.
+ * It basically makes the piezo beep two times.
+ */
+void piezoBeep(){
+  for(int i = 0; i < 2; i++){
+    tone(piezo, 750);
+    delay(125);
+    noTone(piezo);
+    delay(125);
+  }
+}
+
+
+/*
+ * The joystick input function runs when the user needs to
+ * input wifi name and wifi password. This function basically allows
+ * the user to use the joystick to type on the lcd screen and then 
+ * it stores the user input in wifi name or password variables.
+ */
+void joystickInput(char str1[]){
+  
+  int cx = 0;
+  int xState, yState;
+  int asciiVal = 32;
+  touchState = 0;
+  while (touchState == 0) {
+    touchState = digitalRead(touchSensor);
+    xState = analogRead(xJoy);
+    yState = analogRead(yJoy);
+
+    if (100 < xState < 1000 && yState > 900) {
+      cx--;
+      if (cx < 0) {
+        cx = 0;
+      }
+      
+      if (int(str1[cx]) < 33) {
+        asciiVal = 32;
+      }
+      else {
+        asciiVal = str1[cx];
+      }
+      piezoBeep();
+
+    }
+
+    else if (100 < xState < 1000 && yState < 100) {
+      if (cx < 15) {
+        cx++;
+      }
+      
+      if (int(str1[cx]) < 32) {
+        asciiVal = 32;
+      }
+      else {
+        asciiVal = str1[cx];
+      }
+      piezoBeep();
+    }
+
+    else if (100 < yState < 1000 && xState < 100) {
+      asciiVal++;
+      if (asciiVal == 127) {
+        asciiVal = 32;
+      }
+    }
+    else if (100 < yState < 1000 && xState > 900) {
+      asciiVal--;
+      if (asciiVal == 31) {
+        asciiVal = 126;
+      }
+    }
+    char s = asciiVal;
+    lcdPrint(String(s), cx, 1, false);
+    str1[cx] = s;
+    delay(150);
+  }
+  for(byte i = strlen(str1) - 1; i >= 0; i--){
+    if(str1[i] == 32){
+      str1[i] = '\0';
+    }
+    else{
+      break;
+    }
+  }
+}
+/*
    The laserSetup function runs after the setupCount function.
    This function basically makes sure that the lasers are set up
    correctly.
 */
 void laserSetup() {
 
-  for (int i = 0; i < 2; i++) {
-    tone(piezo, 700);
-    delay(125);
-    noTone(piezo);
-    delay(125);
-  }
+  piezoBeep();
 
   lcdPrint("Set Lasers", 3, 0, true);
   digitalWrite(redPin, HIGH);
@@ -146,12 +296,7 @@ void laserSetup() {
     delay(150);
   }
 
-  for (int i = 0; i < 2; i++) {
-    tone(piezo, 700);
-    delay(125);
-    noTone(piezo);
-    delay(125);
-  }
+  piezoBeep();
 
   int x = 0;
   lcdPrint("Both Lasers", 3, 0, true);
@@ -208,12 +353,7 @@ void lcdPrint(String value, int cx, int cy, bool lcdClear) {
    call depending on whether the live count needs to be changed or the max capacity.
 */
 int changeCount(int tempVar, int minVal, int cx, int cy) {
-  for (int i = 0; i < 2; i++) {
-    tone(piezo, 700);
-    delay(125);
-    noTone(piezo);
-    delay(125);
-  }
+  piezoBeep();
   if (tempVar < minVal) {
     tempVar = minVal;
   }
@@ -386,7 +526,7 @@ void uploadData() {
     while (WiFi.status() != WL_CONNECTED) {
       digitalWrite(greenPin, LOW);
       digitalWrite(redPin, HIGH);
-      WiFi.begin(ssid, pass);  // Connect to WPA/WPA2 network. Change this line if using open or WEP network
+      WiFi.begin(wifiName, password);  // Connect to WPA/WPA2 network. Change this line if using open or WEP network
       delay(3000);
     }
   }
