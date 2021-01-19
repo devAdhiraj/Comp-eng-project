@@ -405,11 +405,7 @@ void trackCount() {
   }
 
   if (trackTime >= 500) {
-    digitalWrite(greenPin, LOW);
-    digitalWrite(redPin, HIGH);
     uploadData();
-    digitalWrite(greenPin, HIGH);
-    digitalWrite(redPin, LOW);
   }
 
   while (tripWire1 == 1 && tripWire2 == 1 && touchState == 0) {
