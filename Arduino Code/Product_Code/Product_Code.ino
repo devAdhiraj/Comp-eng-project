@@ -1,3 +1,4 @@
+
 #include "WiFiEsp.h"
 #include "ThingSpeak.h" 
 
@@ -540,7 +541,6 @@ void uploadData() {
   else {
     trackTime = 400;
   }
-  //  trackCount();
 }
 
 

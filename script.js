@@ -9,12 +9,22 @@ function myFunction(){
     liveCount = parseInt(data.field1);
     maxCapacity = parseInt(data.field2);
     spaceLeft = maxCapacity - liveCount;
+
+    if(maxCapacity < liveCount){
+      spaceLeft = 0;
+      document.getElementById('inactive').innerHTML = "At Max Capacity";
+    }
+
     document.getElementById("count").innerHTML = "Live Count: " + String(liveCount);
     document.getElementById("cap").innerHTML = "Max Capacity: " + String(maxCapacity);
     document.getElementById("space").innerHTML = "Space Left: " + String(spaceLeft);
 
-    if(typeof(maxCapacity) == "number"){
-      
+    console.log(typeof(maxCapacity) == "number");
+    console.log(maxCapacity);
+    console.log(spaceLeft);
+
+    if(typeof(maxCapacity) == "number" && maxCapacity > 0 && spaceLeft > 0){
+      console.log("wtf");
     google.charts.load('current', {packages: ['corechart']});
         google.charts.setOnLoadCallback(drawChart);
 
@@ -50,7 +60,8 @@ function myFunction(){
           chart.draw(data, options);
         }
       }
-  })
+    })
+
   .catch((err) => {
     document.getElementById("inactive").innerHTML = "Device Inactive";
     })
