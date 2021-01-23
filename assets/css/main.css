@@ -198,31 +198,53 @@ input, select, textarea {
 			color: inherit;
 			text-decoration: none;
 		}
+
+#mine{
+	display: flex;
+	width: 90vw;
+	margin: auto;
+}
 #piechart {
 float: left;
-width: 45vw;
+/* width: 45vw; */
 height: 50vh;
 color: #ffffff;
 text-color: #ffffff;
+flex:1;
 }
 
 #inactive {
 	margin: 25%;
 }
-
+#myData{
+	flex: 1;
+}
 #cap, #count, #space{
-	float:left;
-	width: 20vw;
+	/* float:left; */
+	/* width: 20vw; */
 	height: 10vh;
+	text-align: left;
 
 }
-@media only screen and (max-aspect-ratio: 301/272){
+@media only screen and (max-aspect-ratio: 675/600){
+	#mine{
+		display: inline-block;
+	}
+	#myData{
+		display: flex;
+		width: 90vw;
+		height: 5vh;
+		margin: 35px 0 35px 0;
+	}
+	#DataTitle{
+		display: none;
+	}
 	#piechart {
 		width:90vw;
 	}
 	#cap, #count, #space {
-		width: 80vw;
-		height: 5vh;
+		/* height: 5vh; */
+		flex: 1;
 	}
 }
 iframe{
