@@ -1,7 +1,7 @@
 # Grade 12 - Computer Engineering Project
 This is the source code for my grade 12 Computer Engineering Project. 
 The device's purpose is to count and track the number of people in an area and upload that information to a website.
-This device can be placed at a store for instance, and it can help track how many people are in the store. This information can be useful during the pandemic to follow social distancing laws. To learn more about this project visit [the project website](devAdhiraj.github.io/compengproject/about).
+This device can be placed at a store for instance, and it can help track how many people are in the store. This information can be useful during the pandemic to follow social distancing laws. To learn more about this project visit [the project website](https://devadhiraj.github.io/compengproject/).
 # Viewing the Code
 
 ## Summary ##
