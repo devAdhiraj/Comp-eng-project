@@ -40,4 +40,13 @@ Please ignore this folder as it just contains more code for styling the website.
 ### webfonts folder ###
 This folder contains files for some of the icons and fonts used in the website. 
 
+## Summary ##
 
+### Important Files
+* index.html
+* about.html
+* script.js
+* assets/css/main.css
+* Arduino Code/Product_Code/Product_Code.ino
+
+[a relative link] index.html
