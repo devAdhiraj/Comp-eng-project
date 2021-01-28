@@ -206,8 +206,8 @@ input, select, textarea {
 }
 #piechart {
 float: left;
-/* width: 45vw; */
-height: 50vh;
+width: 60%;
+height: auto;
 color: #ffffff;
 text-color: #ffffff;
 flex:1;
@@ -232,15 +232,15 @@ flex:1;
 	}
 	#myData{
 		display: flex;
-		width: 90vw;
+		width: 80vw;
 		height: 5vh;
 		margin: 35px 0 35px 0;
 	}
-	#DataTitle{
+	/* #DataTitle{
 		display: none;
-	}
+	} */
 	#piechart {
-		width:90vw;
+		width:80vw;
 	}
 	#cap, #count, #space {
 		/* height: 5vh; */
@@ -248,15 +248,14 @@ flex:1;
 	}
 }
 iframe{
-	float: center;
+	margin:auto;
 	width: 500px;
-	max-width: 100vw;
 	height: 300px;
 	overflow:scroll;
 }
 @media only screen and (max-width: 600px){
 		iframe {
-			width: 88vw;
+			width: 85vw;
 		}
 }
 .aboutContainer{
