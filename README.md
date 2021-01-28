@@ -49,4 +49,4 @@ This folder contains files for some of the icons and fonts used in the website.
 * assets/css/main.css
 * Arduino Code/Product_Code/Product_Code.ino
 
-[a relative link] index.html
+[a relative link](index.html)
