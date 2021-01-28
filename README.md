@@ -11,7 +11,9 @@ The device's purpose is to count and track the number of people in a room and pu
 * [about.html](about.html)
 * [script.js](script.js)
 * [main.css](assets/css/main.css)
-* [Arduino Code](Arduino Code/Product_Code/Product_Code.ino)
+
+
+[Arduino Code](Arduino Code/Product_Code/Product_Code.ino)
 
 ## Arduino Code ##
 The code for arduino is in the Arduino Code/Product Code Folder, it contains comments explaining what each part of the code does.
