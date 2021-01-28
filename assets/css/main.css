@@ -259,6 +259,161 @@ iframe{
 			width: 88vw;
 		}
 }
+.aboutContainer{
+	text-align: justify;
+}
+.vidContainer{
+	width: 70vh;
+	height: auto;
+	float: right;
+	margin: 10px;
+}
+.demoVid {
+	width: 100%;
+	height: auto%;
+}
+
+
+.containerVid {
+	width: 60%;
+	height: auto;
+	margin: auto;
+	padding: 7px;
+}
+
+
+.bold{
+	color: inherit;
+	font-weight: 800;
+}
+
+.uploadData {
+	width:100%;
+	height: auto;
+	margin-top: 10px;
+}
+
+.mainLabel {
+	width: 55%;
+	height: auto;
+	float: right;
+	margin: 10px;
+}
+.mylist :first-child .bold{
+	color: orange;
+	font-weight: 900;
+}
+
+.mylist :nth-child(3) .bold{
+	color: #ff00ff;
+	font-weight: 900;
+}
+
+.mylist :nth-child(4) .bold{
+	color: red;
+	font-weight: 900;
+}
+.mylist :nth-child(5) .bold{
+	color: #00bfff;
+	font-weight: 900;
+}
+.mylist :nth-child(6) .bold{
+	color: #00ffff;
+	font-weight: 900;
+}
+.mylist :nth-child(7) .bold{
+	color: yellow;
+	font-weight: 900;
+
+}
+.mylist :nth-child(8) .bold{
+	color: #00ff7b;
+	font-weight: bold;
+}
+
+.anotherList :nth-child(1) .laserBold {
+	color:#00ffff;
+	font-weight: bold;
+}
+
+
+.anotherList :nth-child(2) .laserBold {
+	color:#00ff7b;
+	font-weight: bold;
+}
+
+
+.anotherList :nth-child(3) .laserBold {
+	color:red;
+	font-weight: bold;
+}
+
+
+.anotherList :nth-child(4) .laserBold {
+	color:yellow;
+	font-weight: bold;
+}
+
+.laserImage {
+	width: 55%;
+	height: 67%;
+	float: right;
+	margin: 10px;
+	margin-right: 3px;
+}
+.savingWifi {
+	width: 60%;
+	height:auto;
+	float: right;
+	margin-left: 10px;
+}
+.report{
+	margin: auto;
+}
+.personCount {
+	width: 50%;
+	height: auto;
+	float: right;
+	margin: 10px;
+}
+
+@media only screen and (max-aspect-ratio: 101/81){
+	.personCount {
+		width: 100%;
+		float: none;
+	}
+	.vidContainer{
+		height: auto;
+		width: 80vw;
+		float: none;
+	}
+	.savingWifi{
+		width: 80vw;
+		float: none;
+	}
+	.containerVid {
+		width: 80vw;
+		height: auto;
+	}
+	.wifiSetup{
+		width: 100%;
+		height: 100%;
+	}
+	.mainLabel {
+		width: 83vw;
+		float: none;
+		height: auto;
+		margin: auto;
+	}
+	.laserImage {
+		width: 83vw;
+		float: none;
+		height: auto;
+		margin: auto;
+	}
+}
+
+
 	h1 {
 		font-size: 4rem;
 		line-height: 1.1;
@@ -277,7 +432,7 @@ iframe{
 	}
 
 	h4 {
-		font-size: 1rem;
+		font-size: 1.1rem;
 	}
 
 	h5 {

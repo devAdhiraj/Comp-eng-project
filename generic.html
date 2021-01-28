@@ -6,7 +6,7 @@
 -->
 <html>
 	<head>
-		<title>Generic Page - Massively by HTML5 UP</title>
+		<title>About - Comp Eng Project</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -19,99 +19,169 @@
 
 				<!-- Header -->
 					<header id="header">
-						<a href="index.html" class="logo">Massively</a>
+						<a href="index.html" class="logo">Device Data</a>
 					</header>
 
 				<!-- Nav -->
-					<nav id="nav">
-						<ul class="links">
-							<li><a href="index.html">This is Massively</a></li>
-							<li class="active"><a href="generic.html">Generic Page</a></li>
-							<li><a href="elements.html">Elements Reference</a></li>
-						</ul>
-						<ul class="icons">
-							<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-							<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-							<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-							<li><a href="#" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
-						</ul>
-					</nav>
+				<nav id="nav">
+					<ul class="links">
+						<li><a href="index.html">Home</a></li>
+						<li class="active"><a href="generic.html">About</a></li>
+					</ul>
+					<ul class="icons">
+						<li><a href="#" class="icon brands fa-google"><span class="label">Gmail</span></a></li>
+						<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+						<li><a href="https://github.com/devAdhiraj" target="_blank" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+					</ul>
+				</nav>
 
 				<!-- Main -->
-					<div id="main">
-
-						<!-- Post -->
-							<section class="post">
-								<header class="major">
-									<span class="date">April 25, 2017</span>
-									<h1>This is a<br />
-									Generic Page</h1>
-									<p>Aenean ornare velit lacus varius enim ullamcorper proin aliquam<br />
-									facilisis ante sed etiam magna interdum congue. Lorem ipsum dolor<br />
-									amet nullam sed etiam veroeros.</p>
-								</header>
-								<div class="image main"><img src="images/pic01.jpg" alt="" /></div>
-								<p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fergiat. Pellentesque in mi eu massa lacinia malesuada et a elit. Donec urna ex, lacinia in purus ac, pretium pulvinar mauris. Nunc lorem mauris, fringilla in aliquam at, euismod in lectus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Curabitur sapien risus, commodo eget turpis at, elementum convallis enim turpis, lorem ipsum dolor sit amet nullam.</p>
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dapibus rutrum facilisis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Etiam tristique libero eu nibh porttitor fermentum. Nullam venenatis erat id vehicula viverra. Nunc ultrices eros ut ultricies condimentum. Mauris risus lacus, blandit sit amet venenatis non, bibendum vitae dolor. Nunc lorem mauris, fringilla in aliquam at, euismod in lectus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In non lorem sit amet elit placerat maximus. Pellentesque aliquam maximus risus. Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum.</p>
-							</section>
-
+				<div id="main">
+					<h1>About this Device</h1>
+					<section class="aboutDevice">
+						<div class="aboutTitle">
+							<h2>Device Description</h2>
 					</div>
+					<div class="aboutContainer">
+						<p>
+							<div class="vidContainer">
+					<iframe allowfullscreen="allowfullscreen" class="demoVid" src="https://www.youtube.com/embed/b7LlvkqRtAo"></iframe>
+				</div>
+				This device's function is to keep track of the number of people in an area by monitoring how many people are entering and leaving that area. It can then display the count on an LCD screen, and it also periodically uploads this data to this website. Also, the user can set the max capacity of the indoor space where this device is placed, and it can alert the user when the count goes over the max capacity. This device is inspired by the social distancing limits faced during the current pandemic. The versatility of this device, coupled with its ability to autonomously and reliably keep track of the number of people in an area, make it a practical device. This device can be placed at the entrance of a store, shop, arena, etc. Then, it can provide the added benefit of uploading data to a website. For instance, if this device is placed at a store and a customer is wondering if the store is busy or not, then they can simply check the Live Count and Capacity available on the website.
 
+								</p>
+				</div>
+
+	</section>
+	<section class="wifiSetupContainer">
+		<h2>How to Setup Wifi on the Device</h2>
+		<div class="containerVid">
+			<iframe allowfullscreen="allowfullscreen" class="wifiSetup" src="https://www.youtube.com/embed/b7LlvkqRtAo"></iframe>
+		</div>
+	</section>
+
+	<section>
+		<h2>Hardware Components in the Device</h2>
+		<section>
+		<h3>Main Device</h3>
+		<p><img class='mainLabel' src="images\Main Device-Labeled.png">
+			<ul class="mylist">
+			<li><strong class="bold">Joystick:</strong> The joystick is used to increment and decrement numbers when setting up the count and capacity. It is also used to toggle through all the ASCII Characters when entering the Wifi Name and Password.</li>
+
+			<li><strong class="bold">Touch Sensor:</strong> The touch sensor is used during the device setup process.</li>
+
+			<li><strong class="bold">Piezo Buzzer:</strong> The piezo buzzer creates a quick beeping sound whenever the user presses the touch sensor. It also produces a constant beeping sound whenever the Live count goes over the max capacity to alert the user to walk back.</li>
+
+			<li><strong class="bold">RGB Indicator LED:</strong>  During the laser setup, the RGB Led shows red when lasers are not pointing at the laser sensors, and it shows green when both lasers are correctly set up. It also turns red if max capacity is reached or exceeded, and it stays green for the rest of the time.</li>
+
+			<li><strong class="bold">LCD Screen:</strong> This displays all the instructions during the setup process. After the setup is complete, it shows the live count and capacity.</li>
+
+			<li><strong class="bold">Laser Sensors:</strong> The laser sensors return a value of 1 when the lasers are pointing at them and 0 otherwise. This information can be used to track if a person is going in or out of the area.</li>
+
+			<li><strong class="bold">Wifi Module:</strong> The ESP8266 wifi module can connect to the local wifi network and send data to a website.</li>
+
+			<li><strong class="bold">9V DC Adapter:</strong> Powers the arduino, alternatives like a battery snap can also be used.</li>
+		</ul>
+	</section>
+	<section>
+		<h3>Laser Device</h3>
+		<p> <img class="laserImage" src="images\Lasers Device-Labeled.png">
+			<ul class="anotherList">
+				<li><strong class="laserBold">Laser Diodes:</strong> Laser diodes emit a concentrated beam of light.</li>
+
+				<li><strong class="laserBold">Power Supply Module:</strong> This module comes with a built-in switch that allows it to be turned on/off. It is powered by a 9V battery, but it outputs a consistent power supply of 5V.</li>
+
+				<li><strong class="laserBold">Potentiometer:</strong> The potentiometer is a variable resistor that allows the user to control the brightness of the lasers.</li>
+
+				<li><strong class="laserBold">Laser Adjusting Mechanism:</strong> This mechanism can be rotated, which changes the angle at which the lasers are pointing, and hence changes the height of where the lasers point. It can also be shifted horizontally and allows the user to align the lasers with the sensors.</li>
+			</ul>
+		</p>
+	</section>
+	</section>
+	<section>
+		<h2>How this Device Works - Software</h2>
+		<p>The software on this device can be split into three main categories -</p>
+		<ul>
+			<li>Wifi and Device Setup</li>
+			<li>Person Tracking Algorithm</li>
+			<li> Uploading Data to my Website</li>
+		</ul>
+	</section>
+
+		<section>
+			<h2>Wifi and Device Setup</h2>
+			<section>
+				<h3>Device Setup</h3>
+				<p>The device setup code mostly involves receiving input from the joystick and the touch sensor, and then
+					displaying some corresponding data on the LCD. Also, the piezo buzzer and the LED complement user input
+					 by providing feedback based on user input. For example, the piezo beeps whenever the user presses the
+					 touch sensor and the LED switches between red and green depending on the setup stage.</p>
+			</section>
+			<section>
+				<h3>Wifi Setup</h3>
+				<section>
+				<h4>Typing using Joystick</h4>
+				<p>Moving the joystick vertically toggles between ASCII characters, including common symbols, numbers, lowercase letters and uppercase letters. Moving the joystick horizontally changes cursor location.
+</p>
+			</section>
+			<section>
+				<h4>Saving Wifi Credentials to Arduino's EEPROM</h4>
+				<p>
+					<img class="savingWifi" src="images\savingWifi.png">
+					Arduino’s EEPROM is 1 kb, which means 1024 bytes. Each byte is given a memory address from 0-1023. Each of these memory addresses can store an 8-bit binary value.
+					<br>
+					Memory address 0 is used to store the length of the wifi name string. Then, each character in the string is converted to an integer value using ASCII and those values are converted to binary. Each binary value is stored at a memory address.
+					The password string is stored in the same way, except, instead of starting from 0, the string is saved starting with the next available memory location.
+					<br>
+					Storing the length of the string before storing the actual string is important because the length of the string tells the read function how many memory addresses to read to get the full string.
+				</p>
+			</section>
+		</section>
+	</section>
+	<section>
+		<h2>Person Tracking Algorithm</h2>
+		<p><img class="personCount" src="images\Possible Scenarios for Lasers.jpg">
+			<br>The people tracking algorithm is designed in a way so that it can handle normal cases as well as edge cases.
+			<br>At a given point in time, the device can be in any of the four states shown in the diagram - Either both laser wires are connected, or one of them is tripped or both of them are tripped.
+
+			<ul>
+				This algorithm records two pieces of data -
+				<li>The laser wire that was first blocked, which would give the initial direction from where the person came.</li>
+				<li>The laser wire that was first blocked, which would give the initial direction from where the person came.</li>
+			</ul>
+			Now, if the first laser wire blocked is the same as the last laser wire unblocked, that means the person came and left in the same direction. Hence, the count does not change. Otherwise, the count’s value will change by 1.
+			<br>A key assumption that must be made for this algorithm is that the lasers are close enough to each other that no one can stand in between them without blocking at least one of them. Hence, the lasers are placed very close together on the device.
+
+		</p>
+	</section>
+	<section>
+		<h2>Uploading Data to my Website</h2>
+		<p>
+			The arduino uploads data to my website every 32.5 seconds. The process of how my code works to achieve this can be seen in the flowchart diagram.
+			<br>
+			<img src="images\Uploading Data to Website FlowChart - Final.png" class="uploadData">
+		</p>
+	</section>
+	<section>
+		<h2>Design and Reflection Report</h2>
+<iframe  class="report" src="https://docs.google.com/presentation/d/e/2PACX-1vS6g1aP8RRoziJltWAlGu5PuUDsWo1kKO5eotHyCl6yE98vlNHVF0d9vLtdke3u4AH8VLlUmq-DsoH0/embed?start=false&loop=false&delayms=3000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>	</section>
 				<!-- Footer -->
-					<footer id="footer">
+						<footer>
 						<section>
-							<form method="post" action="#">
-								<div class="fields">
-									<div class="field">
-										<label for="name">Name</label>
-										<input type="text" name="name" id="name" />
-									</div>
-									<div class="field">
-										<label for="email">Email</label>
-										<input type="text" name="email" id="email" />
-									</div>
-									<div class="field">
-										<label for="message">Message</label>
-										<textarea name="message" id="message" rows="3"></textarea>
-									</div>
-								</div>
-								<ul class="actions">
-									<li><input type="submit" value="Send Message" /></li>
-								</ul>
-							</form>
-						</section>
-						<section class="split contact">
-							<section class="alt">
-								<h3>Address</h3>
-								<p>1234 Somewhere Road #87257<br />
-								Nashville, TN 00000-0000</p>
-							</section>
-							<section>
-								<h3>Phone</h3>
-								<p><a href="#">(000) 000-0000</a></p>
-							</section>
-							<section>
-								<h3>Email</h3>
-								<p><a href="#">info@untitled.tld</a></p>
-							</section>
-							<section>
-								<h3>Social</h3>
-								<ul class="icons alt">
-									<li><a href="#" class="icon brands alt fa-twitter"><span class="label">Twitter</span></a></li>
-									<li><a href="#" class="icon brands alt fa-facebook-f"><span class="label">Facebook</span></a></li>
-									<li><a href="#" class="icon brands alt fa-instagram"><span class="label">Instagram</span></a></li>
-									<li><a href="#" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
-								</ul>
-							</section>
+							<h3>Social</h3>
+							<ul class="icons alt">
+								<li><a href="#" class="icon brands fa-google"><span class="label">Gmail</span></a></li>
+								<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+								<li><a href="https://github.com/devAdhiraj" target="_blank" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+							</ul>
 						</section>
 					</footer>
 
-				<!-- Copyright -->
-					<div id="copyright">
-						<ul><li>&copy; Untitled</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li></ul>
-					</div>
-
-			</div>
+			<!-- Copyright -->
+		<div id="copyright">
+				<ul><li>Adhiraj Singh</li></ul>
+		</div>
+</div>
 
 		<!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>
