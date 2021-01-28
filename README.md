@@ -1,7 +1,7 @@
 # Grade 12 - Computer Engineering Project
 This is the source code for my grade 12 Computer Engineering Project. 
-The device's purpose is to count and track the number of people in a room and publish that information to a website.
-
+The device's purpose is to count and track the number of people in an area and upload that information to a website.
+This device can be placed at a store for instance, and it can help track how many people are in the store. This information can be useful during the pandemic to follow social distancing laws. To learn more about this project visit: devAdhiraj.github.io/compengproject
 # Viewing the Code
 
 ## Summary ##
@@ -11,9 +11,7 @@ The device's purpose is to count and track the number of people in a room and pu
 * [about.html](about.html)
 * [script.js](script.js)
 * [main.css](assets/css/main.css)
-
-
-[Arduino Code](https://github.com/devAdhiraj/compengproject/blob/gh-pages/Arduino%20Code/Product_Code/Product_Code.ino)
+* [Arduino Code](https://github.com/devAdhiraj/compengproject/blob/gh-pages/Arduino%20Code/Product_Code/Product_Code.ino)
 
 ## Arduino Code ##
 The code for arduino is in the Arduino Code/Product Code Folder, it contains comments explaining what each part of the code does.
