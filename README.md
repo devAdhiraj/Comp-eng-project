@@ -27,17 +27,17 @@ The assets folder contains 4 more folders -
 * sass
 * webfonts
 
-###css folder###
+### css folder ###
 The CSS folder contains 3 files in it. Please ignore the fontawesome-all.min and noscript file.
 Main.css is the file that is responsible for most of the styling of the website.
 
-###js folder###
+### js folder ###
 Please ignore this folder as it just contains code to make the website responsive and compatible with multiple browsers.
 
-###sass###
+### sass ###
 Please ignore this folder as it just contains more code for styling the website.
 
-###webfonts folder###
+### webfonts folder ###
 This folder contains files for some of the icons and fonts used in the website. 
 
 
