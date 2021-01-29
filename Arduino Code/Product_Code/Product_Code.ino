@@ -1,4 +1,13 @@
 
+/*
+This is the Arduino Code for the device - by Adhiraj Singh.
+
+A lot of the initial setup code is for the ESP8266 wifi module. 
+The main code is split up into functions where each function performs a specific task.
+Each function has comments above it that explain the general task of the function in simple terms.
+I have also explained this code on my website in a more visual way so that it is easier to understand.
+*/
+
 #include "WiFiEsp.h"
 #include "ThingSpeak.h" 
 
@@ -11,12 +20,14 @@ WiFiEspClient  client;
 SoftwareSerial Serial1(6, 7); // RX, TX
 #define ESP_BAUDRATE  19200
 
-LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
+LiquidCrystal lcd(12, 11, 5, 4, 3, 2); // LCD setup
 
+// the channel number and API key correspond to the thingspeak account and server where the arduino
+// will send the data.
 unsigned long myChannelNumber = 1265432;
 const char * myWriteAPIKey = "943POHU0XUSO9TVT";
 
-// Initialize our values
+// Initialize variables
 int touchSensor = A4;
 int piezo = 10;
 int sensor1 = 8;
@@ -147,6 +158,8 @@ void setWifiCred() {
   saveData();
 
 }
+
+
 /*
  * The saveData function is called after the user has inputted the
  * wifi name and password. This function basically saves both the variables
@@ -257,6 +270,8 @@ void joystickInput(char str1[]){
     }
   }
 }
+
+
 /*
    The laserSetup function runs after the setupCount function.
    This function basically makes sure that the lasers are set up
