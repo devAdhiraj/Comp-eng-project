@@ -1,3 +1,12 @@
+/*
+This file contains the API fetch request which allows it to retrieve the count and Capacity
+data from the thingspeak website. It then provides those values to the piechart, and then it
+renders the piechart and sends it to the index.html file.
+It also includes logic, so if their is no data available, then it displays device inactive.
+Also, this code resizes the graph when the window resizes, which makes the graph responsive.
+This means that you can view this website on any device like phone, tablet, laptop, pc, etc.
+*/
+
 window.addEventListener("resize", myFunction);
 myFunction();
 function myFunction(){

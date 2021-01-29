@@ -2,9 +2,12 @@
 @import url("https://fonts.googleapis.com/css?family=Merriweather:300,700,300italic,700italic|Source+Sans+Pro:900");
 
 /*
-	Massively by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+This file contains most of the styling for the website.
+This file was included as a template so I did not write all the 4920 lines of code in this file.
+However, I have heavily modified and added my own style rules throughout this file.
+For example, I wanted my website to be dark themed so I had to make a lot of modifications like changing
+font-colors, icon-colors, background-color for all elements.
+All the style rules that I created are between lines: 205-417.
 */
 
 html, body, div, span, applet, object,
@@ -199,6 +202,7 @@ input, select, textarea {
 			text-decoration: none;
 		}
 
+/*The code that I added start from here*/
 #mine{
 	display: flex;
 	width: 90vw;
@@ -236,9 +240,7 @@ flex:1;
 		height: 5vh;
 		margin: 35px 0 35px 0;
 	}
-	/* #DataTitle{
-		display: none;
-	} */
+
 	#piechart {
 		width:80vw;
 	}
@@ -412,6 +414,7 @@ iframe{
 	}
 }
 
+/*The coded added by me ends here*/
 
 	h1 {
 		font-size: 4rem;
