@@ -32,7 +32,7 @@ The images folder contains all the images that were used in the website.
 ### Assets Folder ###
 The assets folder contains 4 more folders - 
 * css
-* JS
+* js
 * sass
 * webfonts
 
