@@ -43,7 +43,7 @@ Main.css is the file that is responsible for most of the styling of the website.
 ### js folder ###
 Please ignore this folder as it just contains code to make the website responsive and compatible with multiple browsers.
 
-### sass ###
+### sass folder###
 Please ignore this folder as it just contains more code for styling the website.
 
 ### webfonts folder ###
