@@ -28,7 +28,7 @@ The script.js is a Java Script file. This file contains code which is responsibl
 ### images folder ###
 The images folder contains all the images that were used in the website.
 
-### Assets Folder ###
+### assets Folder ###
 The assets folder contains 4 more folders - 
 * css
 * js
