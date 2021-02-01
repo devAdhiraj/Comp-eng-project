@@ -17,16 +17,15 @@ This device can be placed at a store for instance, and it can help track how man
 The code for arduino is in the Arduino Code/Product Code Folder, it contains comments explaining what each part of the code does.
 
 ## Website Code ##
+An [HTML5 UP Template](https://html5up.net/massively) was used for the basic design of the website, please see [README.txt](README.txt) to learn more about the template. However, the design and style of the website was modified. The specific modifications are discussed in each file.
 
 ### HTML Files ###
-The index.html and about.html files contains the code which creates the basic structure of the website and provides content that is going to be displayed on the website.
+The index.html and about.html files contain the code which creates the basic structure of the website and provides content that is going to be displayed on the website.
 
 ### Back-end ###
 The script.js is a Java Script file. This file contains code which is responsible for creating a GET API request for the piechart. Then, it stores the data into variables and uses the values in those variables to create the piechart. It also contains logic to handle situations when there is no data available.
 
-
-Please ignore the README.txt file.
-
+### images folder ###
 The images folder contains all the images that were used in the website.
 
 ### Assets Folder ###
